@@ -37,7 +37,6 @@ frameInterval = convertDuration(frameInterval, timeUnit);
 makeTimestamp(treatmentExperimentDiff+deltaT, frameInterval, timeUnit);
 
 function convertDuration(duration, timeUnit) {
-pick d77fca4 RandomAccessible: add definedBounds()
 	if (timeUnit == "min") {
 		return duration / 60;
 	} else if (timeUnit == "h") {
