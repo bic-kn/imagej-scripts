@@ -15,7 +15,7 @@
 run("Bio-Formats Macro Extensions");
 
 // Load file for the currently open image
-openImagePath = getInfo("image.directory")+getInfo("image.filename")
+openImagePath = getInfo("image.directory")+File.separator+getInfo("image.filename")
 Ext.setId(openImagePath);
 
 // Extract position from the title of the open image
