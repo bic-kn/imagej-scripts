@@ -53,13 +53,13 @@ for (no=0; no<imageCount; no++) {
 	if (t > currentT) {
 		Ext.getPlaneTimingDeltaT(deltaT[no], no);
 		if (deltaT[no] == deltaT[no]) { // not NaN
-		s = "\t" + (no + 1) + ": " + deltaT[no] + " s";
-		Overlay.drawString(deltaT[no] + " s", xpoints[3], ypoints[3]);
-		Overlay.add;
-		Overlay.setPosition(channel, slice, t+1);
-	}
-	print(s);
-	currentT = t;
+			s = "\t" + (no + 1) + ": " + deltaT[no] + " s";
+			Overlay.drawString(deltaT[no] + " s", xpoints[3], ypoints[3]);
+			Overlay.add;
+			Overlay.setPosition(channel, slice, t+1);
+		}
+		print(s);
+		currentT = t;
 	}
 }
 Overlay.show();
