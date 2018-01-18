@@ -1,6 +1,8 @@
 // @Integer(label="Seconds between treatment and experiment start") treatmentExperimentDiff
 // @String(label="Time unit for conversion", choices={"s", "min", "h"}) timeUnit
 // @Integer(label="Shown decimal points of times") decimalPoints
+// @Integer(label="Font size", value=18) fontSize
+// @ColorRGB(label="Font color") color
 
 /*
  * This macro reads metainformation about the "deltaT" from the file
@@ -16,6 +18,14 @@ run("Bio-Formats Macro Extensions");
 
 // Remember stack position
 Stack.getPosition(channel, slice, frame);
+
+// Get location of selection
+Roi.getCoordinates(xpoints, ypoints);
+
+// Set color and font size of text
+rgb = split(color, ",");
+setColor(parseInt(rgb[0]), parseInt(rgb[1]), parseInt(rgb[2]));
+setFont("SansSerif", fontSize);
 
 // Load file for the currently open image
 openImagePath = getInfo("image.directory")+File.separator+getInfo("image.filename")
@@ -39,20 +49,21 @@ deltaT = newArray(imageCount);
 print("Plane deltas (seconds since experiment began):");
 currentT=-1;
 for (no=0; no<imageCount; no++) {
-  Ext.getZCTCoords(no, z, c, t)
-  if (t > currentT) {
-  	Ext.getPlaneTimingDeltaT(deltaT[no], no);
-  	if (deltaT[no] == deltaT[no]) { // not NaN
-      s = "\t" + (no + 1) + ": " + deltaT[no] + " s";
-      Overlay.drawString(deltaT[no] + " s", 5, 20);
-      Overlay.add;
-      Overlay.setPosition(channel, slice, t+1);
+	Ext.getZCTCoords(no, z, c, t);
+	if (t > currentT) {
+		Ext.getPlaneTimingDeltaT(deltaT[no], no);
+		if (deltaT[no] == deltaT[no]) { // not NaN
+		s = "\t" + (no + 1) + ": " + deltaT[no] + " s";
+		Overlay.drawString(deltaT[no] + " s", xpoints[3], ypoints[3]);
+		Overlay.add;
+		Overlay.setPosition(channel, slice, t+1);
 	}
 	print(s);
 	currentT = t;
 	}
 }
 Overlay.show();
+
 print("Complete.");
 
 function convertDuration(duration, timeUnit) {
