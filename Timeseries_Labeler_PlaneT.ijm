@@ -28,7 +28,7 @@ setColor(parseInt(rgb[0]), parseInt(rgb[1]), parseInt(rgb[2]));
 setFont("SansSerif", fontSize);
 
 // Load file for the currently open image
-openImagePath = getInfo("image.directory")+File.separator+getInfo("image.filename")
+openImagePath = getInfo("image.directory")+File.separator+getInfo("image.filename");
 Ext.setId(openImagePath);
 
 // Extract position from the title of the open image
@@ -38,8 +38,8 @@ Ext.setId(openImagePath);
 Ext.getImageCount(imageCount);
 print("Plane count: " + imageCount);
 
-Ext.getZCTCoords(0, z, c, t)
-print("z: "+z+" c:"+c+" t:"+t)
+Ext.getZCTCoords(0, z, c, t);
+print("z: "+z+" c:"+c+" t:"+t);
 
 creationDate = "";
 Ext.getImageCreationDate(creationDate);
