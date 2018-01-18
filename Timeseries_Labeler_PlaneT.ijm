@@ -1,4 +1,3 @@
-// @Integer(label="Seconds between treatment and experiment start") treatmentExperimentDiff
 // @String(label="Time unit for conversion", choices={"s", "min", "h"}) timeUnit
 // @Integer(label="Shown decimal points of times") decimalPoints
 // @Integer(label="Font size", value=18) fontSize
