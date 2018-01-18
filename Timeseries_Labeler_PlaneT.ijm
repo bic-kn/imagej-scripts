@@ -53,8 +53,9 @@ for (no=0; no<imageCount; no++) {
 		Ext.getPlaneTimingDeltaT(deltaT[no], no);
 		if (deltaT[no] == deltaT[no]) { // not NaN
 			currentDeltaT = parseFloat(deltaT[no]);
-			s = "\t" + (no + 1) + ": " + currentDeltaT + " s";
-			Overlay.drawString(toString(currentDeltaT, decimalPoints) + " s", xpoints[3], ypoints[3]);
+			convertedCurrentDeltaT = convertDuration(currentDeltaT, timeUnit);
+			s = "\t" + (no + 1) + ": " + convertedCurrentDeltaT + " " + timeUnit;
+			Overlay.drawString(toString(convertedCurrentDeltaT, decimalPoints) + " " + timeUnit, xpoints[3], ypoints[3]);
 			Overlay.add;
 			Overlay.setPosition(channel, slice, t+1);
 		}
