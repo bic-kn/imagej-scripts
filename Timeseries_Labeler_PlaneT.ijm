@@ -14,6 +14,9 @@
 // Enable Bio-Formats macro extensions
 run("Bio-Formats Macro Extensions");
 
+// Remember stack position
+Stack.getPosition(channel, slice, frame);
+
 // Load file for the currently open image
 openImagePath = getInfo("image.directory")+File.separator+getInfo("image.filename")
 Ext.setId(openImagePath);
@@ -34,21 +37,22 @@ print("Creation date: " + creationDate);
 
 deltaT = newArray(imageCount);
 print("Plane deltas (seconds since experiment began):");
-currentT=0;
+currentT=-1;
 for (no=0; no<imageCount; no++) {
   Ext.getZCTCoords(no, z, c, t)
   if (t > currentT) {
   	Ext.getPlaneTimingDeltaT(deltaT[no], no);
   	if (deltaT[no] == deltaT[no]) { // not NaN
-      Stack.setFrame(currentT);
       s = "\t" + (no + 1) + ": " + deltaT[no] + " s";
       Overlay.drawString(deltaT[no] + " s", 5, 20);
       Overlay.add;
+      Overlay.setPosition(channel, slice, t+1);
 	}
 	print(s);
 	currentT = t;
-  }
+	}
 }
+Overlay.show();
 print("Complete.");
 
 function convertDuration(duration, timeUnit) {
